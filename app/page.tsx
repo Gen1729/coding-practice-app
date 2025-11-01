@@ -3,61 +3,11 @@ import Link from "next/link";
 
 export default function Home() {
   const categories = [
-    {
-      title: "Data Structures",
-      description: "基本的なデータ構造の実装を練習",
-      items: [
-        { name: "DSU (Union-Find)", path: "/editer", difficulty: "Medium", language: "C++" },
-        { name: "Segment Tree", path: "/editer", difficulty: "Hard", language: "C++" },
-        { name: "Binary Indexed Tree", path: "/editer", difficulty: "Medium", language: "C++" },
-        { name: "Trie", path: "/editer", difficulty: "Medium", language: "C++" },
-      ],
-      icon: "🌳",
-      color: "blue"
-    },
-    {
-      title: "Algorithms",
-      description: "重要なアルゴリズムをタイピングで習得",
-      items: [
-        { name: "Binary Search", path: "/editer", difficulty: "Easy", language: "Python" },
-        { name: "Quick Sort", path: "/editer", difficulty: "Medium", language: "C++" },
-        { name: "Dijkstra", path: "/editer", difficulty: "Hard", language: "C++" },
-        { name: "DFS / BFS", path: "/editer", difficulty: "Easy", language: "Python" },
-      ],
-      icon: "⚡",
-      color: "purple"
-    },
-    {
-      title: "Dynamic Programming",
-      description: "動的計画法の典型問題を学習",
-      items: [
-        { name: "Knapsack Problem", path: "/editer", difficulty: "Medium", language: "Python" },
-        { name: "LCS (Longest Common Subsequence)", path: "/editer", difficulty: "Medium", language: "C++" },
-        { name: "Edit Distance", path: "/editer", difficulty: "Medium", language: "Python" },
-        { name: "Matrix Chain Multiplication", path: "/editer", difficulty: "Hard", language: "C++" },
-      ],
-      icon: "🎯",
-      color: "green"
-    },
-    {
-      title: "Graph Theory",
-      description: "グラフアルゴリズムの実装練習",
-      items: [
-        { name: "Topological Sort", path: "/editer", difficulty: "Medium", language: "C++" },
-        { name: "Strongly Connected Components", path: "/editer", difficulty: "Hard", language: "C++" },
-        { name: "Minimum Spanning Tree", path: "/editer", difficulty: "Medium", language: "C++" },
-        { name: "Maximum Flow", path: "/editer", difficulty: "Hard", language: "C++" },
-      ],
-      icon: "🕸️",
-      color: "yellow"
-    },
+    { name: "DSU (Union-Find)", path: "/editer/0"},
+    { name: "Segment Tree", path: "/editer/1"},
+    { name: "Binary Indexed Tree", path: "/editer/2"},
+    { name: "Trie", path: "/editer/3"},
   ];
-
-  const difficultyColors = {
-    Easy: "bg-green-400/30 text-green-200 border-green-400/40",
-    Medium: "bg-yellow-400/30 text-yellow-200 border-yellow-400/40",
-    Hard: "bg-red-400/30 text-red-200 border-red-400/40",
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-700 via-slate-600 to-slate-700">
@@ -99,41 +49,21 @@ export default function Home() {
 
         {/* Categories Grid */}
         <div className="space-y-8">
-          {categories.map((category, idx) => (
-            <div key={idx} className="bg-slate-600/50 rounded-xl border border-slate-500/50 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">{category.icon}</span>
-                <div>
-                  <h3 className="text-2xl font-bold text-white">{category.title}</h3>
-                  <p className="text-slate-200 text-sm">{category.description}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {categories.map((item, itemIdx) => (
+              <Link
+                key={itemIdx}
+                href={item.path}
+                className="bg-slate-500/50 hover:bg-slate-500/70 border border-slate-400/50 rounded-lg p-4 transition-all hover:scale-105 hover:shadow-lg group"
+              >
+                <div className="flex flex-col gap-2">
+                  <h4 className="font-semibold text-white group-hover:text-blue-200 transition-colors">
+                    {item.name}
+                  </h4>
                 </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {category.items.map((item, itemIdx) => (
-                  <Link
-                    key={itemIdx}
-                    href={item.path}
-                    className="bg-slate-500/50 hover:bg-slate-500/70 border border-slate-400/50 rounded-lg p-4 transition-all hover:scale-105 hover:shadow-lg group"
-                  >
-                    <div className="flex flex-col gap-2">
-                      <h4 className="font-semibold text-white group-hover:text-blue-200 transition-colors">
-                        {item.name}
-                      </h4>
-                      <div className="flex gap-2 items-center">
-                        <span className={`px-2 py-0.5 text-xs font-semibold rounded-full border ${difficultyColors[item.difficulty as keyof typeof difficultyColors]}`}>
-                          {item.difficulty}
-                        </span>
-                        <span className="text-xs text-slate-200 font-mono">
-                          {item.language}
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Features Section */}
